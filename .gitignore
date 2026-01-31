@@ -1,0 +1,34 @@
+# ===== Python =====
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+
+# env
+.env
+.env.*
+!.env.example
+
+# ===== Virtualenv =====
+venv/
+.venv/
+
+# ===== Node =====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===== Build =====
+build/
+dist/
+
+# ===== OS / Editor =====
+.DS_Store
+.idea/
+.vscode/
+
+# local db & runtime storage
+backend/local.db
+backend/storage/

@@ -1,0 +1,109 @@
+/*Backgruond.css*/
+
+  .outer {
+    background-color: #FFFFFF;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    box-sizing: border-box;
+   
+  }
+
+  .header {
+    width: 100%;
+    padding: 1.5vh 2vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF; /* 흰 배경 */
+    box-sizing: border-box;
+  }
+  .menu-item {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .header-icon {
+    width: 60%;
+    height: 60%;
+    cursor: pointer;
+  }
+  
+  .middle {
+    background-color: #F7F9FF;
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2vw;
+    padding-top: 3vh; 
+    
+  }
+  
+  .inner {
+    background-color: #FFFFFF;
+    width: 70vw;
+    height: 50vh;
+    border-radius: 1.5vw;
+    border: 0.2vw solid #BBCCFF;
+    margin-bottom: 5vh;
+  }
+
+  .inner-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1vw;
+    padding: 1vh 1vw 0 1vw;
+  }
+  
+  .toolbar-icon {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+  }
+  
+  .inner-divider {
+    border: none;
+    border-top: 2px solid #A8A8A8;
+    margin: 1vh 1vw;
+  }
+
+  .upload-box {
+    margin: 40px auto;
+    padding: 20px;
+    width: 80%;
+    background-color: #F8F8F8;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    position: relative;
+  }
+  
+  .upload-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    position: absolute; 
+    left: 50px;          
+    top: 30px; 
+  }
+  
+  .upload-text {
+    font-weight: bold;
+    font-size: 1.2rem;    
+  }
+  
+  .upload-subtext {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+  }
+
+  
