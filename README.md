@@ -1,1 +1,79 @@
+# 🎬 AI 영상 음성 → 텍스트 요약 서비스
 
+영상 파일을 업로드하면  
+**영상 청크 분할 → 음성 인식(STT) → 결과 캐싱 → 텍스트 병합 → AI 요약**  
+과정을 자동으로 수행하는 AI 기반 텍스트 변환 서비스입니다.
+
+> 대용량 영상에서 발생하는 느린 STT 처리 문제를  
+> **ffmpeg 청크 분할 + Redis 캐싱**으로 개선하는 데 초점을 둔 프로젝트입니다.
+
+---
+
+## 📌 프로젝트 개요
+
+- **프로젝트 유형**: 개인 프로젝트 (포트폴리오)
+- **목표**
+  - 대용량 영상 STT 처리 성능 개선
+  - 중복 연산 최소화를 통한 서버 부하 감소
+- **핵심 포인트**
+  - 청크 단위 STT 처리
+  - Redis를 활용한 결과 캐싱
+  - AWS 기반 파일 저장 및 관리
+
+---
+
+## 🚀 주요 기능
+
+- 🎥 영상 파일 업로드 (mp4)
+- ✂️ ffmpeg를 이용한 영상 청크 분할
+- 🧠 Whisper 기반 음성 → 텍스트 변환(STT)
+- ⚡ Redis 캐싱으로 중복 STT 연산 방지
+- ☁️ AWS S3에 원본 영상 및 결과 텍스트 저장
+- 📝 OpenAI API 기반 텍스트 요약
+- 📊 STT 진행률 실시간 확인
+
+---
+
+## 🛠 기술 스택
+
+### Backend
+- Python
+- FastAPI
+- Whisper
+- SQLAlchemy
+
+### Frontend
+- React
+- Axios
+- CSS
+
+### Infrastructure
+- AWS EC2
+- AWS S3
+- AWS RDS (MySQL)
+- Redis
+- Nginx
+
+### Tools & APIs
+- ffmpeg
+- OpenAI API
+
+---
+
+## 🧩 시스템 아키텍처
+
+```text
+[Client (React)]
+        |
+        |  영상 업로드
+        v
+[FastAPI Server]
+        |
+        |-- ffmpeg (영상 청크 분할)
+        |-- Redis (청크 / STT 결과 캐싱)
+        |-- Whisper (STT)
+        |-- OpenAI API (요약)
+        |
+        v
+[AWS S3]      [AWS RDS]
+(파일 저장)   (메타데이터)
