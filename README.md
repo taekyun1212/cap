@@ -33,7 +33,7 @@
 
 ---
 
-## 🛠 기술 스택
+##  기술 스택
 
 ### Backend
 - Python
@@ -61,24 +61,9 @@
 
 ##  시스템 아키텍처
 
-```text
-[Client (React)]
-        |
-        |  영상 업로드 (multipart/form-data)
-        v
-[FastAPI Server]
-        |
-        |  (Processing)
-        |-- ffmpeg   : 영상 청크 분할 / wav 변환
-        |-- Whisper  : 청크 단위 STT
-        |
-        |  (Cache & State)
-        |-- Redis    : chunk / transcript 캐싱(중복 STT 방지)
-        |
-        |  (Persist)
-        |-- S3        : 원본 video / transcript.txt 저장
-        |-- RDS       : video metadata / status / transcript_url
-        |
-        |  (External)
-        |--> OpenAI API : transcript 요약 요청
+<img width="400" height="800" alt="Group 21" src="https://github.com/user-attachments/assets/d4424ed3-7907-4f0d-a771-01f2a83f8dec" />
+
+## 데이터 흐름도(Data Flow)
+
+
 
