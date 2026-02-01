@@ -69,6 +69,12 @@
 
 <img width="500" height="1100" alt="Group 22" src="https://github.com/user-attachments/assets/453045a8-969c-4428-b0fc-38a85998e13f" />
 
+## 화면
+<img width="360" height="196" alt="image" src="https://github.com/user-attachments/assets/3050c2d4-3a0a-4e41-afcf-9b0a5d912c25" />
+<img width="352" height="216" alt="image" src="https://github.com/user-attachments/assets/33e9e44e-7580-4b0e-844a-f8a2bb311b7f" />
+<img width="307" height="163" alt="image" src="https://github.com/user-attachments/assets/4e10deea-b854-4e97-ab41-84d0f59eea52" />
+<img width="335" height="181" alt="image" src="https://github.com/user-attachments/assets/f8cf0889-fe53-4b41-b9ed-7484ee79f538" />
+
 
 
 
