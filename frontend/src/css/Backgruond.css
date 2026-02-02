@@ -106,4 +106,25 @@
     margin-top: 5px;
   }
 
+  .toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #F0F4FF;
+    color: #333;
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: 1px solid #BBCCFF;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    animation: fadeInOut 2s ease-in-out;
+    z-index: 9999;
+  }
   
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-10px); }
+  }
+    
