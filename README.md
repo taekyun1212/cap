@@ -67,7 +67,8 @@
 
 ## 데이터 흐름도(Data Flow)
 
-<img width="500" height="1100" alt="Group 22" src="https://github.com/user-attachments/assets/453045a8-969c-4428-b0fc-38a85998e13f" />
+<img width="1200" height="800" alt="Group 22" src="https://github.com/user-attachments/assets/43b1fc96-3250-4e3b-958f-1a853bfcb961" />
+
 
 ## 화면
 <img width="360" height="196" alt="image" src="https://github.com/user-attachments/assets/3050c2d4-3a0a-4e41-afcf-9b0a5d912c25" />
