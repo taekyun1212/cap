@@ -28,9 +28,9 @@ app = FastAPI()
 def on_startup():
     try:
         Base.metadata.create_all(bind=engine)
-        print("✅ DB 연결/테이블 생성 완료")
+        print(" DB 연결/테이블 생성 완료")
     except OperationalError as e:
-        print("⚠️ DB 연결 실패 - DB 없이 서버만 실행합니다.")
+        print(" DB 연결 실패 - DB 없이 서버만 실행합니다.")
         print(e)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # backend 폴더
@@ -101,7 +101,7 @@ async def upload_and_chunk(file: UploadFile = File(...), db: Session = Depends(g
         for path in chunk_paths:
             os.remove(path)
     except Exception as cleanup_err:
-        print(f"⚠️ 임시 파일 정리에 실패했습니다: {cleanup_err}")
+        print(f" 임시 파일 정리에 실패했습니다: {cleanup_err}")
 
     return {
         "video_id": video.id,
@@ -138,7 +138,7 @@ async def run_transcribe(video_id: int):
             await redis_client.set(f"transcript:{video_id}:{index}", transcript, ex=1800)
 
             total += 1
-            print(f"✅ 청크 {index} 변환 완료")
+            print(f" 청크 {index} 변환 완료")
 
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"청크 {index} 처리 실패: {str(e)}")
