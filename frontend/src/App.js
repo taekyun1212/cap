@@ -14,7 +14,7 @@ function App() {
   const [videoId, setVideoId] = useState(null);
   const [resultText, setResultText] = useState('');
   const [progress, setProgress] = useState(null);
-
+  const [toast, setToast] = useState('');
 
   const API_BASE = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000";
 
@@ -83,30 +83,31 @@ function App() {
 
 };
 
-  const handleCopy = () => {
-    const textarea = document.createElement("textarea");
-    textarea.value = resultText;
-    document.body.appendChild(textarea);
-    textarea.select();
-    try {
-      document.execCommand("copy");
-      alert("복사되었습니다.");
-    } catch (err) {
-      alert("복사 실패");
-    }
-    document.body.removeChild(textarea);
-  };
+  const handleCopy = async () => {
+  try {
+    await navigator.clipboard.writeText(resultText);
+    setToast("결과가 복사되었습니다. Ctrl+V로 붙여넣기 해주세요");
+    setTimeout(() => setToast(''), 2000);
+  } catch {
+    setToast("복사에 실패했습니다");
+    setTimeout(() => setToast(''), 2000);
+  }
+};
 
 
   const handleDownload = () => {
-    const blob = new Blob([resultText], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${fileName || 'summary'}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+  const blob = new Blob([resultText], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${fileName || 'summary'}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+
+  setToast("파일이 저장되었습니다");
+  setTimeout(() => setToast(''), 2000);
+};
+
 
   const hadleRestart = () => {
     setIsUploaded(false);
@@ -118,6 +119,12 @@ function App() {
 
   return (
     <div className="outer">
+    {/*  토스트 알림 */}
+    {toast && (
+      <div className="toast">
+        {toast}
+      </div>
+    )}
       <div className="header">
         <div style={{ paddingLeft: '20%' }} className="menu-item">
          
