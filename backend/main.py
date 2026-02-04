@@ -60,7 +60,7 @@ def get_db():
         db.close()
 
 # 영상 업로드 + S3 저장 + RDS 기록 + 청크 분할 + Redis 저장
-@app.post("/upload-and-chunk")
+@app.post("/videos", status_code=201)
 async def upload_and_chunk(file: UploadFile = File(...), db: Session = Depends(get_db)):
    # 1. 업로드된 파일을 임시 파일로 저장
     tmp_path = os.path.join(tempfile.gettempdir(), f"{uuid.uuid4()}.mp4")
@@ -108,9 +108,10 @@ async def upload_and_chunk(file: UploadFile = File(...), db: Session = Depends(g
         "chunk_count": len(chunk_paths),
         "message": "S3 업로드 및 ffmpeg 청크 분할 완료"
     }
+    
 # 청크별 음성 → 텍스트 변환 & Redis 저장
-@app.post("/run-transcribe/{video_id}")
-async def run_transcribe(video_id: int):
+@app.post("/videos/{video_id}/transcripts", status_code=202)
+async def create_transcripts(video_id: int)
     index = 0
     total = 0
 
@@ -156,8 +157,8 @@ async def run_transcribe(video_id: int):
         "message": "Whisper 인퍼런스 완료"
     }
 # 텍스트 병합 + S3 업로드 + RDS 저장
-@app.post("/merge-transcript/{video_id}")
-async def merge_transcript(video_id: int, db: Session = Depends(get_db)):
+@app.put("/videos/{video_id}/transcript")
+async def upsert_transcript(video_id: int, db: Session = Depends(get_db)):
     transcripts = []
     index = 0
 
@@ -192,8 +193,8 @@ async def merge_transcript(video_id: int, db: Session = Depends(get_db)):
         "message": "Transcript 병합 및 S3 저장 완료"
     }
 
-@app.post("/summarize-transcript/{video_id}")
-async def summarize_transcript(video_id: int, db: Session = Depends(get_db)):
+@app.post("/videos/{video_id}/summaries", status_code=201)
+async def create_summary(video_id: int, db: Session = Depends(get_db)):
     # 1. DB에서 transcript_url 가져오기
     video = db.query(Video).filter(Video.id == video_id).first()
     if not video or not video.transcript_url:
@@ -233,8 +234,8 @@ async def summarize_transcript(video_id: int, db: Session = Depends(get_db)):
         "message": "요약 성공"
     }
 
-@app.get("/transcribe-progress/{video_id}")
-async def get_transcribe_progress(video_id: int):
+@app.get("/videos/{video_id}/transcripts/progress")
+async def get_transcript_progress(video_id: int)
     index = 0
     count = 0
     # 전체 청크 수 확인
