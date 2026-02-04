@@ -35,9 +35,9 @@ function App() {
 
      setResultText('파일 업로드 중...');
     // 1. 업로드
-    const uploadRes = await axios.post(`${API_BASE}/upload-and-chunk`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-  });
+    const uploadRes = await axios.post(`${API_BASE}/videos`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+});
     
 
     const videoId = uploadRes.data.video_id;
@@ -50,7 +50,8 @@ function App() {
     setProgress(0);
     interval = setInterval(async () => {
       try {
-        const res = await axios.get(`${API_BASE}/transcribe-progress/${videoId}`);
+        const res = await axios.get(`${API_BASE}/videos/${videoId}/transcripts/progress`);
+
         setProgress(res.data.progress);
       } catch (e) {
         console.error("진행률 확인 실패:", e);
@@ -58,7 +59,7 @@ function App() {
     }, 2000); // 0.5초 간격
 
     // 2. STT
-    const sttRes = await axios.post(`${API_BASE}/run-transcribe/${videoId}`);
+    const sttRes = await axios.post(`${API_BASE}/videos/${videoId}/transcripts`);
     setResultText(prev => prev + `\n\n STT 완료 (청크 ${sttRes.data.transcribed_chunks}개)`);
 
     // STT 진행률 숨기기
@@ -66,11 +67,11 @@ function App() {
     setProgress(null); 
 
     // 3. 자막 병합
-    const mergeRes = await axios.post(`${API_BASE}/merge-transcript/${videoId}`);
+    const mergeRes = await axios.put(`${API_BASE}/videos/${videoId}/transcript`);
     setResultText(prev => prev + `\n\n 자막 병합 완료\n링크: ${mergeRes.data.transcript_url}`);
 
     // 4. 요약
-    const summaryRes = await axios.post(`${API_BASE}/summarize-transcript/${videoId}`);
+    const summaryRes = await axios.post(`${API_BASE}/videos/${videoId}/summaries`);
     setResultText(prev => prev + `\n\n 요약 결과:\n\n${summaryRes.data.summary}`);
 
   } catch (err) {
